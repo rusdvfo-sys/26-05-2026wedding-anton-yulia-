@@ -593,7 +593,8 @@
             <input type="hidden" name="_subject" value="Ответ гостя на свадебную анкету" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_next" id="next-url" value="" />
+            <input type="hidden" name="_next" value="https://rusdvfo-sys.github.io/thanks.html" />
+            <input type="hidden" name="_url" value="https://rusdvfo-sys.github.io/" />
 
             <div class="field">
               <div class="field-title">Вы будете присутствовать на свадьбе?</div>
@@ -688,7 +689,6 @@
   </div>
   <script>
     (function () {
-      var nextField = document.getElementById('next-url');
       var companionField = document.getElementById('companion-field');
       var guestDetails = document.getElementById('guest-details');
       var guestTwoCard = document.getElementById('guest-two-card');
@@ -742,16 +742,6 @@
         drinksSummary.value = selectedDrinks.join(', ');
       }
 
-      function updateThanksLink(state) {
-        if (!nextField) return;
-
-        var thanksUrl = new URL(window.location.href);
-        thanksUrl.pathname = thanksUrl.pathname.replace(/[^/]*$/, 'thanks.html');
-        thanksUrl.search = state ? ('?attendance=' + state) : '';
-        thanksUrl.hash = '';
-        nextField.value = thanksUrl.toString();
-      }
-
       function updateGuestFlow() {
         var attendanceChoice = document.querySelector('input[name="Присутствие на свадьбе"]:checked');
         var companionChoice = document.querySelector('input[name="Формат присутствия"]:checked');
@@ -798,7 +788,6 @@
         }
 
         syncDrinkSummary();
-        updateThanksLink(isNotComing ? 'no' : (isComing ? 'yes' : ''));
       }
 
       attendanceInputs.forEach(function (input) {
